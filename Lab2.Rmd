@@ -10,7 +10,46 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
+library(ggplot2)
+
 choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
 head(choco)
 
 dim(choco)
+
+dateFac <- as.factor(choco$Review.Date)
+ggplot(data = choco, aes(x = dateFac)) + geom_bar() 
+```
+
+There are 1,852 rows of data.
+
+The trend for the data was a gradually increasing number of reviews per year and peaked during 2015, which dropped off around 2016.
+
+```{r}
+
+ggplot(data = choco, aes(x = Rating)) + geom_histogram(binwidth = 1)
+
+ggplot(data = choco, aes(x = Rating)) + geom_histogram(binwidth = .5)
+
+ggplot(data = choco, aes(x = Rating)) + geom_histogram(binwidth = .25)
+```
+
+The ratings seem to follow a somewhat normal distribution with the mode falling around 3.75. There also seems to be a slight skew to the left, with more data falling below the mode than above it. A rating of 5 appears to be a potential outlier. 
+
+```{r}
+
+ggplot(data = choco, aes(x = Cocoa.Pct, y = Rating, group = Cocoa.Pct)) + geom_boxplot()
+```
+
+The percentage of chocolate do not seem to correspond to the rating of the chocolate, as for most of the ratings, their means fall around the same place. 
+
+
+```{r}
+
+#p3 is a subset of the data that was created
+p3 <- dplyr::filter(choco, Company.Location %in% c("U.S.A.", "France", "Canada"))
+
+ggplot(data = p3, aes(x = Company.Location, y = Rating)) + geom_boxplot()
+```
+
+All three companies have the same median rating of 3.25, but France has a much smaller IQR with a few outliers on the lower end of the rating scale. 
