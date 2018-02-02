@@ -1,41 +1,43 @@
+｀｀｀｛r｝
 install_github("heike/classdata")
 choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
 head(choco)
 summary(choco)
 str(choco)
-1 What is the overall number of chocolate bars rated?
+＃1 What is the overall number of chocolate bars rated?
   dim(choco)
-  
-2 How does the number of ratings depend on the year? Draw a bar chart of the number of reports.
+  
+＃2 How does the number of ratings depend on the year? Draw a bar chart of the number of reports.
 install.packages("ggplot2")
 library(ggplot2)
 ggplot(data=choco,aes(x=Review.Date))+geom_bar()                
 
-Indiviaul:
-  
-1.How are ratings distributed?
+＃Indiviaul:
+  
+＃1.How are ratings distributed?
   
 ggplot(data=choco,aes(x=Rating))+geom_histogram(binwidth=0.25)
 
-  It is a Unimodal,Symmetric shape with the outliers 5
-  
-2.Do ratings depend on the cocoa percentage of a chocolate bar?
+＃It is a Unimodal,Symmetric shape with the outliers 5
+  
+＃2.Do ratings depend on the cocoa percentage of a chocolate bar?
   
 ggplot(data=choco,aes(x=Cocoa.Pct))+geom_histogram(binwidth=1)
 
-Not really. The median is 70.0 and the mean is 71.7 (saw in summary(choco))
+＃Not really. The median is 70.0 and the mean is 71.7 (saw in summary(choco))
 
-Most of the consumers like these kind coco precentage of chocolate bar.
+＃Most of the consumers like these kind coco precentage of chocolate bar.
 
-The ratings doesn't depend on the cocoa percentage of a chocolate bar .
+＃The ratings doesn't depend on the cocoa percentage of a chocolate bar .
 
-3 How do ratings compare across different company locations?
+＃3 How do ratings compare across different company locations?
   
 pa<-dplyr::filter(choco, Company.Location %in% c("U.S.A.", "France", "Canada"))
 ggplot(data=pa,aes(y=Rating,x=Company.Location))+geom_boxplot()+coord_flip()
 
-These three places have the same median, but the Q1 and Q3 are different.
+＃These three places have the same median, but the Q1 and Q3 are different.
 
-The Q3 in rarting of France and USA are the same.
+＃The Q3 in rarting of France and USA are the same.
 
-The Q1 in rarting of France and Canada are the same.
+＃The Q1 in rarting of France and Canada are the same.
+｀｀｀
