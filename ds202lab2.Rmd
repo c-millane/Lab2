@@ -1,0 +1,97 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+#Lab 2
+#group activity
+###2/1/2018
+
+
+[x] question 1
+
+ How are ratings distributed? 
+ 
+ Draw a histogram of ratings and describe it.
+
+```{r echo=FALSE}
+library(ggplot2)
+choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
+
+
+ggplot(choco, aes(x = Rating)) +    geom_histogram(binwidth = .25) 
+
+
+```
+ 
+ 
+ Notice that ratings 5 and 1 are distant, thus the can be classified as outliers.
+
+
+[x] question 2
+
+ -Do ratings depend on the cocoa percentage of a chocolate bar?
+ 
+There is not enough evidence to determine if rating is directly proportional to percentage of a chocolate bar. 
+
+
+```{r echo=FALSE}
+library(ggplot2)
+choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
+
+
+ggplot(data = choco , aes (x= Cocoa.Pct, y= Rating)) + geom_point() 
+ggplot(data = choco , aes (x= Cocoa.Pct, y= Rating)) + geom_line() 
+
+
+```
+
+[x] question 3
+
+ -How do ratings compare across different company locations? Focus on the three locations with the most ratings:
+ 
+
+
+First, show the locations with most ratings
+
+```{r echo=FALSE}
+library(ggplot2)
+
+comp <- dplyr::filter(choco, Company.Location %in% c("U.S.A.", "France", "Canada"))
+
+ggplot(data = comp , aes (x= Company.Location, y= Rating)) + geom_point()
+ 
+```
+
+Now we compare across different company locations using boxplots
+
+
+```{r echo=FALSE}
+library(ggplot2)
+choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
+
+
+comp <- dplyr::filter(choco, Company.Location %in% c("U.S.A.", "France", "Canada"))
+
+
+ggplot(data = comp, aes(y = Rating, x  = Company.Location)) + geom_boxplot() 
+
+```
+
+
+
+From the box plot we can conclude the following: 
+
+* Median seems to be the same for all locations
+
+* Canada : seems to have greater amount of points in the upper section (median-upper quartile) 
+
+* France : seems to have roughly the same amount of points between median-upper quartile and median-lower quartile
+
+* USA		: seems to have greater amount of points in the lower section (median-lower quartile)
+
+* we can also see outliers for France and the US 
+
+It can be said that Canada is the location with highest rating average, followed by France and the US.
+
