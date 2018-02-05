@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 2. https://github.com/c-millane/Lab2
 3. #Team Work
 
-```{r}
+```{r echo=FALSE}
 library(ggplot2)
 choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
 head(choco)
@@ -24,28 +24,34 @@ names(choco)
 dim(choco)
 
 ```
+
 There are 1,852 rows of data.
-```{r}
+
+```{r echo=FALSE}
 dateFac <- as.factor(choco$Review.Date)
 ggplot(data= choco, aes(x= dateFac)) + geom_bar()
 
 ```
+
 The number of ratings was gradually increasing, but in the past couple years, the number has significantly dropped.
 
-```{r}
+```{r echo=FALSE}
 ggplot(data= choco, aes(x= Rating)) + geom_histogram(binwidth=0.25)
 ```
+
 This histogram is unimodel and appears to be fairly symmetric in shape besides a slight skew to the left, with more data falling below the mode than above it. There also appears to be an outlier at a rating of 5.
 
-```{r}
+```{r echo=FALSE}
 ggplot(data= choco, aes(x= Cocoa.Pct, y= Rating, group = Cocoa.Pct)) + geom_point()
 ```
+
 No the rating does not depend on the Cocoa percentage because this scatter plot shows that the cocoa percentages of the candy bars are given all types of ratings. For example, chocoalte bars with a cocoa percentage of 100% have ratings ranging between 1 and approximately 3.5. The medians for all of the percentages fall around the same place. 
 
-```{r}
+```{r echo=FALSE}
 p3 <- dplyr::filter(choco, Company.Location %in% c("U.S.A.", "France", "Canada"))
 ggplot(data= p3, aes(x= Company.Location, y= Rating)) + geom_boxplot()
 ``` 
+
 All three locations have the same median, but the spreads for all three locations are different. France has a much smaller IQR with a few outliers on the lower end of the rating scale. Quartile 3 for France and the USA are the same, and Quartile 1 of France and Canada are the same.
 
 4. After creating a repository on Github, each of us created our own Rmarkdown file and worked through the questions, helping each other out when someone got stuck. We uploaded our individual files onto Github after checking to see if our answers matched, and compiled them into a single file, which we uploaded onto Github as the final product. This file combined the best aspects of all of our code and written answer in order to ensure that the best product possible was being turned in. 
